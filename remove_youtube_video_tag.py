@@ -6,6 +6,8 @@ PATH = r''
 def remove_tag(path: str) -> None:
     for file in os.listdir(path):
         source = f'{path}\\{file}'
+        if os.path.isdir(source):
+            remove_tag(source)
         if file.endswith('.mp3'):
             parts = file.split(' ')
             if parts[-1][0] == '[' and parts[-1][-5] == ']':
