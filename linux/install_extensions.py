@@ -16,18 +16,40 @@ def run_upgrade() -> None:
     subprocess.run([PREFIX, "upgrade", "-y"], check=True)
 
 def install_misc() -> None:
-    subprocess.run([PREFIX, "install", "-y", "python3-pip", "curl", "git", "wget", "build-essential", "lldb"], check=True)
-
-def install_rust() -> None:
-    subprocess.run("curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y", shell=True, check=True)
-    subprocess.run(["bash", "-lc", "rustup component add rust-analyzer"], check=True)
+    subprocess.run([PREFIX, "install", "-y", "python3-pip", "curl", "git", "wget", "build-essential", "lldb", "htop"], check=True)
 
 def install_brave_browser() -> None:
     subprocess.run("curl -fsS https://dl.brave.com/install.sh | sh", shell=True, check=True)
 
-def print_reminders() -> None:
-    print("Remember to manually install Visual Studio Code (https://code.visualstudio.com/Download).")
-    print("Remember to manually install Go (https://go.dev/dl/).")
+def print_install_visual_studio_code() -> None:
+    message = """
+    Install Visual Studio Code:
+      1. Download and run the .deb file from "https://code.visualstudio.com/Download".
+      2. Run "sudo apt install ./code_*.deb"."""
+    print(message)
+
+def print_install_rust() -> None:
+    message = """
+    Install Rust:
+      1. Run: "curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh".
+      2. Run: "rustup component add rust-analyzer"."""
+    print(message)
+
+def print_install_go() -> None:
+    message = """
+    Install Go:
+      1. Download the .tar.gz file from "https://go.dev/dl/".
+      2. Run "sudo tar -C /usr/local -xzf <.tar.gz file>".
+
+    Add Go to PATH (https://go.dev/doc/install):
+      1. Open .bashrc by running "nano ~/.bashrc".
+      2. Add the line "export PATH=$PATH:/usr/local/go/bin" at the bottom of .bashrc.
+      3. Update the terminal by running "source ~/.bashrc".
+      4. Confirm installation by running "go version".
+
+    Install Delve:
+      1. Run "go install github.com/go-delve/delve/cmd/dlv@latest"."""
+    print(message)
 
 def main() -> None:
     check_sudo()
@@ -35,8 +57,9 @@ def main() -> None:
     run_upgrade()
     install_misc()
     install_brave_browser()
-    install_rust()
-    print_reminders()
+    print_install_visual_studio_code()
+    print_install_rust()
+    print_install_go()
 
 if __name__ == "__main__":
     main()
