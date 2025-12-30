@@ -23,7 +23,7 @@ def install_brave_browser() -> None:
 
 def print_install_visual_studio_code() -> None:
     message = """
-    Install Visual Studio Code:
+    Install Visual Studio Code (Debian/Ubuntu):
       1. Download and run the .deb file from "https://code.visualstudio.com/Download".
       2. Run "sudo apt install ./code_*.deb"."""
     print(message)

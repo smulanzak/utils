@@ -17,12 +17,8 @@ def run_auto_install() -> None:
     for name, extension in EXTENSIONS.items():
         print(f"- {name} ({extension}).")
 
-    # Launch VSCode
-    print("\nLaunching VSCode...")
-    inform_user()
-    subprocess.run("code . &", shell=True, check=True)
-
     # Wait for VSCode to initialize
+    launch_vscode()
     initialize_vscode()
 
     print()
@@ -36,6 +32,11 @@ def inform_user() -> None:
         print("IMPORTANT: do not close VSCode until the script has completed!")
         time.sleep(1)
     print()
+
+def launch_vscode() -> None:
+    print("\nLaunching VSCode...")
+    inform_user()
+    subprocess.run("code . &", shell=True, check=True)
 
 def initialize_vscode() -> None:
     print("Initializing VSCode...")
